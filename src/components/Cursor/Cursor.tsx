@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import styles from './Cursor.module.css'
-
+/*esse component nao está sendo usado */
 export default function Cursor() {
   const dotRef = useRef<HTMLDivElement | null>(null)
   const ringRef = useRef<HTMLDivElement | null>(null)

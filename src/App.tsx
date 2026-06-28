@@ -21,7 +21,6 @@ export default function App() {
 
   return (
     <LanguageProvider>
-      <Cursor />
       <Background />
       <Navbar />
       <main>
