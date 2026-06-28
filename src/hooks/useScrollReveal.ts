@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
-/** Fades/blurs/scales an element in when it enters the viewport. Attach the returned ref to the element. */
+/** Fades/scales an element in when it enters the viewport. Attach the returned ref to the element. */
 export function useScrollReveal<T extends HTMLElement>(options?: { delay?: number }) {
   const ref = useRef<T | null>(null)
 
@@ -14,12 +14,11 @@ export function useScrollReveal<T extends HTMLElement>(options?: { delay?: numbe
 
     const tween = gsap.fromTo(
       el,
-      { opacity: 0, y: 32, scale: 0.97, filter: 'blur(6px)' },
+      { opacity: 0, y: 32, scale: 0.97 },
       {
         opacity: 1,
         y: 0,
         scale: 1,
-        filter: 'blur(0px)',
         duration: 0.9,
         ease: 'power3.out',
         delay: options?.delay ?? 0,
@@ -53,12 +52,11 @@ export function useStaggerReveal<T extends HTMLElement>(childSelector: string) {
 
     const tween = gsap.fromTo(
       items,
-      { opacity: 0, y: 36, scale: 0.95, filter: 'blur(6px)' },
+      { opacity: 0, y: 36, scale: 0.95 },
       {
         opacity: 1,
         y: 0,
         scale: 1,
-        filter: 'blur(0px)',
         duration: 0.8,
         ease: 'power3.out',
         stagger: 0.12,
