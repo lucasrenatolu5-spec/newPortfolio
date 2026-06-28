@@ -1,10 +1,13 @@
 import { projects } from '../../data/content'
 import { useScrollReveal, useStaggerReveal } from '../../hooks/useScrollReveal'
-import { GitHubIcon, ExternalLinkIcon } from '../Icons'
+import { ExternalLinkIcon } from '../Icons'
 import styles from './Projects.module.css'
-
+import { useLanguage } from '../../i18n/LanguageContext'
 
 export default function Projects() {
+
+  const { t } = useLanguage()
+
   const eyebrowRef = useScrollReveal<HTMLParagraphElement>()
   const titleRef = useScrollReveal<HTMLHeadingElement>({ delay: 0.05 })
   const subRef = useScrollReveal<HTMLParagraphElement>({ delay: 0.1 })
@@ -15,29 +18,27 @@ export default function Projects() {
       <div className="container">
         <div className="section-head">
           <p className="eyebrow reveal" ref={eyebrowRef}>
-            Projects
+            {t.projects.eyebrow}
           </p>
           <h2 className="section-title reveal" ref={titleRef}>
-            Selected <span className="text-gradient">work</span>
+            {t.projects.titlePre} <span className="text-gradient">{t.projects.titleGradient}</span>
           </h2>
           <p className="section-sub reveal" ref={subRef}>
-            A few projects that show how I approach product, code and craft.
+            {t.projects.subtitle}
           </p>
         </div>
 
         <div className={styles.grid} ref={gridRef}>
           {projects.map((project) => (
             <div key={project.title} className={`${styles.card} glass`}>
-              <div className={styles.thumb}>
                 <div className={styles.thumb}>
-                  <iframe
-                    src={project.demoUrl}
+                  <img
+                    src={project.previewImage}
+                    alt={project.title}
                     className={styles.thumbFrame}
-                    title={project.title}
                     loading="lazy"
                   />
                 </div>
-              </div>
               <div className={styles.body}>
                 <p className={styles.tag}>{project.tag}</p>
                 <h3 className={styles.title}>{project.title}</h3>
@@ -50,13 +51,9 @@ export default function Projects() {
                   ))}
                 </div>
                 <div className={styles.links}>
-                  <a href={project.githubUrl} className={styles.linkBtn}>
-                    <GitHubIcon />
-                    GitHub
-                  </a>
-                  <a href={project.demoUrl} className={styles.linkBtn}>
+                  <a target="_blank" rel="noopener noreferrer" href={project.demoUrl} className={styles.linkBtn}>
                     <ExternalLinkIcon />
-                    Visit website
+                    {t.projects.visitWebsite}
                   </a>
                 </div>
               </div>

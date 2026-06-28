@@ -1,8 +1,11 @@
 import { GitHubIcon, LinkedInIcon, MailIcon } from '../Icons'
 import styles from './Footer.module.css'
+import { useLanguage } from '../../i18n/LanguageContext'
 
 export default function Footer() {
   const year = new Date().getFullYear()
+
+  const { t } = useLanguage()
 
   return (
     <footer className={styles.footer}>
@@ -13,19 +16,19 @@ export default function Footer() {
         </a>
 
         <div className={styles.socials}>
-          <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+          <a href="https://github.com/lucasrenatolu5-spec" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
             <GitHubIcon />
           </a>
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <a href="https://www.linkedin.com/in/lucasrenatoo/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
             <LinkedInIcon />
           </a>
-          <a href="mailto:hello@lucas.dev" aria-label="Email">
+          <a href="mailto:lucasrenatolu5@gmail.com" aria-label="Email">
             <MailIcon />
           </a>
         </div>
 
         <p className={styles.meta}>
-          © {year} Lucas. Built with React &amp; TypeScript.
+          © {year} {t.footer.builtWith}
         </p>
       </div>
     </footer>

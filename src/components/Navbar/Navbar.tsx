@@ -1,16 +1,21 @@
 import { useEffect, useState } from 'react'
 import { useMagnetic } from '../../hooks/useMagnetic'
 import styles from './Navbar.module.css'
+import { useLanguage } from '../../i18n/LanguageContext'
 
-const NAV_ITEMS = [
-  { href: '#about', label: 'About' },
-  { href: '#skills', label: 'Skills' },
-  { href: '#projects', label: 'Projects' },
-  { href: '#services', label: 'Services' },
-  { href: '#contact', label: 'Contact' },
-]
 
 export default function Navbar() {
+
+  const { t, lang, toggleLang } = useLanguage()
+
+  const NAV_ITEMS = [
+    { href: '#about', label: t.nav.about },
+    { href: '#skills', label: t.nav.skills },
+    { href: '#projects', label: t.nav.projects },
+    { href: '#services', label: t.nav.services },
+    { href: '#contact', label: t.nav.contact },
+  ]
+
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const ctaRef = useMagnetic<HTMLAnchorElement>()
@@ -42,20 +47,25 @@ export default function Navbar() {
             ))}
           </ul>
 
-          <a href="#contact" ref={ctaRef} className={styles.cta}>
-            Let&apos;s talk<span aria-hidden="true">→</span>
-          </a>
+          <div className={styles.actions}>
+            <a href="#contact" ref={ctaRef} className={styles.cta}>
+              {t.nav.cta}<span aria-hidden="true">→</span>
+            </a>
+            <button onClick={toggleLang} className={styles.langToggle}>
+              {lang === 'pt' ? 'EN' : 'PT'}
+            </button>
 
-          <button
-            className={`${styles.toggle} ${menuOpen ? styles.toggleOpen : ''}`}
-            aria-label="Toggle menu"
-            aria-expanded={menuOpen}
-            onClick={() => setMenuOpen((v) => !v)}
-          >
-            <span />
-            <span />
-            <span />
-          </button>
+            <button
+              className={`${styles.toggle} ${menuOpen ? styles.toggleOpen : ''}`}
+              aria-label="Toggle menu"
+              aria-expanded={menuOpen}
+              onClick={() => setMenuOpen((v) => !v)}
+            >
+              <span />
+              <span />
+              <span />
+            </button>
+          </div>
         </div>
       </nav>
 

@@ -1,3 +1,8 @@
+import lash from '../assets/preview/lash-designer.png'
+import dental from '../assets/preview/dentalClinic.png'
+import dolce from '../assets/preview/dolceFemme.png'
+import fernando from '../assets/preview/drFernando.png'
+
 export interface Skill {
   name: string
   level: string
@@ -9,9 +14,8 @@ export interface Project {
   title: string
   description: string
   tech: string[]
-  thumbClass: string
-  githubUrl: string
   demoUrl: string
+  previewImage: string
 }
 
 export interface Service {
@@ -67,9 +71,8 @@ export const projects: Project[] = [
     description:
       'A booking-focused page for a lash design studio, featuring real service pricing and a clean, feminine visual identity.',
     tech: ['React', 'TypeScript', 'CSS Modules'],
-    thumbClass: 'thumb2',
-    githubUrl: '#',
     demoUrl: 'https://lashsoft.vercel.app/',
+    previewImage: lash,
   },
   {
     tag: 'Web Application',
@@ -77,9 +80,8 @@ export const projects: Project[] = [
     description:
       'An elegant, conversion-focused landing page for a premium aesthetics clinic, with refined motion design and a soft rosé palette.',
     tech: ['React', 'TypeScript', 'Framer Motion'],
-    thumbClass: 'thumb1',
-    githubUrl: '#',
     demoUrl: 'https://deentalclinic.vercel.app/',
+    previewImage: dental,
   },
   
   {
@@ -88,9 +90,8 @@ export const projects: Project[] = [
     description:
       'At Dolce Femme, we believe beauty starts with confidence. Our personalized aesthetic treatments are designed to enhance your natural features with care, elegance, and modern techniques.',
     tech: ['React', 'TypeScript', 'Css3'],
-    thumbClass: 'thumb3',
-    githubUrl: '#',
     demoUrl: 'https://dolcefemme.vercel.app/',
+    previewImage: dolce,
   },
   {
     tag: 'Web Application',
@@ -98,9 +99,8 @@ export const projects: Project[] = [
     description:
       'Professional legal services with integrity and dedication. Protecting your rights with trusted legal solutions.',
     tech: ['React', 'TypeScript', 'Vite'],
-    thumbClass: 'thumb4',
-    githubUrl: '#',
     demoUrl: 'https://projectadvogado.vercel.app/',
+    previewImage: fernando,
   },
 ]
 

@@ -3,10 +3,15 @@ import { useMagnetic } from '../../hooks/useMagnetic'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
 import { GitHubIcon, LinkedInIcon, MailIcon, CheckIcon } from '../Icons'
 import styles from './Contact.module.css'
+import { useLanguage } from '../../i18n/LanguageContext'
+
 
 type Status = 'idle' | 'sending' | 'sent'
 
 export default function Contact() {
+
+  const { t } = useLanguage()
+
   const [status, setStatus] = useState<Status>('idle')
   const [form, setForm] = useState({ name: '', email: '', message: '' })
 
@@ -21,41 +26,46 @@ export default function Contact() {
   const emailLinkRef = useMagnetic<HTMLAnchorElement>()
   const submitRef = useMagnetic<HTMLButtonElement>()
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault()
-    setStatus('sending')
-    // No backend — simulate a successful submission.
-    setTimeout(() => {
-      setStatus('sent')
-      setForm({ name: '', email: '', message: '' })
-      setTimeout(() => setStatus('idle'), 4500)
-    }, 900)
-  }
+const WHATSAPP_NUMBER = '5581989728514'
+
+const handleSubmit = (e: FormEvent) => {
+  e.preventDefault()
+  setStatus('sending')
+
+  const text = `Hi Lucas! My name is ${form.name}.\n\n${form.message}\n\n(Contact email: ${form.email})`
+  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`
+
+  setTimeout(() => {
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer')
+    setStatus('sent')
+    setForm({ name: '', email: '', message: '' })
+    setTimeout(() => setStatus('idle'), 4500)
+  }, 500)
+}
 
   return (
     <section id="contact">
       <div className="container">
         <div className="section-head">
           <p className="eyebrow reveal" ref={eyebrowRef}>
-            Contact
+            {t.contact.eyebrow}
           </p>
           <h2 className="section-title reveal" ref={titleRef}>
-            Let&apos;s build something <span className="text-gradient">great together</span>
+            {t.contact.titlePre} <span className="text-gradient">{t.contact.titleGradient}</span>
           </h2>
           <p className="section-sub reveal" ref={subRef}>
-            Have a project in mind? Tell me about it — I&apos;d love to hear from you.
+            {t.contact.subtitle}
           </p>
         </div>
 
         <div className={styles.grid}>
           <div className={`${styles.info} reveal`} ref={infoRef}>
             <p>
-              Whether you need a new landing page, a full front-end build, or help optimizing an existing product —
-              I&apos;m happy to talk it through.
+              {t.contact.infoText}
             </p>
             <div className={styles.links}>
               <a
-                href="https://github.com"
+                href="https://github.com/lucasrenatolu5-spec"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`${styles.link} glass`}
@@ -72,7 +82,7 @@ export default function Contact() {
               </a>
 
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/lucasrenatoo/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`${styles.link} glass`}
@@ -88,14 +98,14 @@ export default function Contact() {
                 </span>
               </a>
 
-              <a href="mailto:hello@lucas.dev" className={`${styles.link} glass`} ref={emailLinkRef}>
+              <a href="mailto:lucasrenatolu5@gmail.com" className={`${styles.link} glass`} ref={emailLinkRef}>
                 <span className={styles.linkIcon}>
                   <MailIcon />
                 </span>
                 <span>
                   <span className={styles.linkLabel}>EMAIL</span>
                   <br />
-                  <span className={styles.linkValue}>hello@lucas.dev</span>
+                  <span className={styles.linkValue}>lucasrenatolu5@gmail.com</span>
                 </span>
               </a>
             </div>
@@ -104,35 +114,35 @@ export default function Contact() {
           <div className={`${styles.formCard} glass reveal`} ref={formCardRef}>
             <form onSubmit={handleSubmit}>
               <div className={styles.formRow}>
-                <label htmlFor="name">Name</label>
+                <label htmlFor="name">{t.contact.nameLabel}</label>
                 <input
                   type="text"
                   id="name"
                   name="name"
-                  placeholder="Your name"
+                  placeholder={t.contact.namePlaceholder}
                   required
                   value={form.name}
                   onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
                 />
               </div>
               <div className={styles.formRow}>
-                <label htmlFor="email">Email</label>
+                <label htmlFor="email">{t.contact.emailLabel}</label>
                 <input
                   type="email"
                   id="email"
                   name="email"
-                  placeholder="you@email.com"
+                  placeholder={t.contact.emailPlaceholder}
                   required
                   value={form.email}
                   onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
                 />
               </div>
               <div className={styles.formRow}>
-                <label htmlFor="message">Message</label>
+                <label htmlFor="message">{t.contact.messageLabel}</label>
                 <textarea
                   id="message"
                   name="message"
-                  placeholder="Tell me about your project..."
+                  placeholder={t.contact.messagePlaceholder}
                   required
                   value={form.message}
                   onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
@@ -144,11 +154,11 @@ export default function Contact() {
                 ref={submitRef}
                 disabled={status === 'sending'}
               >
-                <span>{status === 'sending' ? 'Sending...' : 'Send Message'}</span>
+                <span>{status === 'sending' ? t.contact.sendSending : t.contact.sendIdle}</span>
               </button>
               <div className={`${styles.success} ${status === 'sent' ? styles.successShow : ''}`}>
                 <CheckIcon />
-                Message sent! I&apos;ll get back to you soon.
+                {t.contact.successText}
               </div>
             </form>
           </div>

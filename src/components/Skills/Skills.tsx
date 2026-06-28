@@ -11,6 +11,8 @@ import {
   ViteIcon,
 } from '../Icons'
 import styles from './Skills.module.css'
+import { useLanguage } from '../../i18n/LanguageContext'
+
 
 const SKILL_ICONS = {
   react: ReactIcon,
@@ -24,6 +26,10 @@ const SKILL_ICONS = {
 }
 
 export default function Skills() {
+
+    const { t } = useLanguage()
+
+
   const eyebrowRef = useScrollReveal<HTMLParagraphElement>()
   const titleRef = useScrollReveal<HTMLHeadingElement>({ delay: 0.05 })
   const subRef = useScrollReveal<HTMLParagraphElement>({ delay: 0.1 })
@@ -34,13 +40,13 @@ export default function Skills() {
       <div className="container">
         <div className="section-head">
           <p className="eyebrow reveal" ref={eyebrowRef}>
-            Skills
+            {t.skills.eyebrow}
           </p>
           <h2 className="section-title reveal" ref={titleRef}>
-            My core <span className="text-gradient">tech stack</span>
+            {t.skills.titlePre} <span className="text-gradient">{t.skills.titleGradient}</span>
           </h2>
           <p className="section-sub reveal" ref={subRef}>
-            The tools I reach for to turn ideas into fast, reliable products.
+            {t.skills.subtitle}
           </p>
         </div>
 

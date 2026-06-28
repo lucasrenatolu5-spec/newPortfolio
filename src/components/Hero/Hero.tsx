@@ -3,14 +3,20 @@ import gsap from 'gsap'
 import { useMagnetic } from '../../hooks/useMagnetic'
 import heroImage from '../../assets/lucas-hero.jpeg'
 import styles from './Hero.module.css'
+import { useLanguage } from '../../i18n/LanguageContext'
 
-const STATS = [
-  { count: 20, label: 'PROJECTS SHIPPED' },
-  { count: 5, label: 'CORE TECHNOLOGIES' },
-  { count: 100, label: '% REMOTE READY' },
-]
 
 export default function Hero() {
+  const { t } = useLanguage()
+
+
+  const STATS = [
+  { count: 20, label: t.hero.stat1 },
+  { count: 5, label: t.hero.stat2 },
+  { count: 100, label: t.hero.stat3 },
+]
+
+
   const sectionRef = useRef<HTMLDivElement | null>(null)
   const visualRef = useRef<HTMLDivElement | null>(null)
   const portraitRef = useRef<HTMLDivElement | null>(null)
@@ -95,34 +101,33 @@ export default function Hero() {
       <div className={`container ${styles.grid}`}>
         <div>
           <p className={styles.greeting}>
-            <span aria-hidden="true">👋</span> Hello, I&apos;m Lucas
+            <span aria-hidden="true">👋</span> {t.hero.greeting}
           </p>
 
           <h1 className={styles.title}>
             <span className={styles.titleLine}>
-              <span>Front-end Developer</span>
+              <span>{t.hero.titleLine1}</span>
             </span>
             <span className={styles.titleLine}>
               <span>
-                crafting <em className="text-gradient" style={{ fontStyle: 'normal' }}>interfaces</em>
+                {t.hero.titleLine2Pre} <em className="text-gradient" style={{ fontStyle: 'normal' }}>{t.hero.titleLine2Em}</em>
               </span>
             </span>
             <span className={styles.titleLine}>
-              <span>that feel alive.</span>
+              <span>{t.hero.titleLine3}</span>
             </span>
           </h1>
 
           <p className={styles.subtitle}>
-            I build fast, accessible and visually-considered web experiences with React and TypeScript — turning
-            ideas into interfaces people enjoy using.
+            {t.hero.subtitle}
           </p>
 
           <div className={styles.ctas}>
             <a href="#projects" ref={primaryCtaRef} className="btn btn-primary">
-              <span>View Projects</span>
+              <span>{t.hero.ctaPrimary}</span>
             </a>
             <a href="#contact" ref={ghostCtaRef} className="btn btn-ghost">
-              <span>Contact Me</span>
+              <span>{t.hero.ctaGhost}</span>
             </a>
           </div>
 
@@ -166,7 +171,7 @@ export default function Hero() {
 
           <div className={`${styles.floatCard} ${styles.statusCard} glass`} ref={statusCardRef}>
             <span className={styles.ping} />
-            <span>Available for work</span>
+            <span>{t.hero.available}</span>
           </div>
         </div>
       </div>

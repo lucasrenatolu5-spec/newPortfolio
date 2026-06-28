@@ -2,6 +2,7 @@ import { pillars } from '../../data/content'
 import { useScrollReveal, useStaggerReveal } from '../../hooks/useScrollReveal'
 import { CodeIcon, BoltIcon, DeviceIcon, CompassIcon } from '../Icons'
 import styles from './About.module.css'
+import { useLanguage } from '../../i18n/LanguageContext'
 
 const PILLAR_ICONS = {
   code: CodeIcon,
@@ -11,6 +12,9 @@ const PILLAR_ICONS = {
 }
 
 export default function About() {
+
+    const { t } = useLanguage()
+
   const eyebrowRef = useScrollReveal<HTMLParagraphElement>()
   const leadRef = useScrollReveal<HTMLParagraphElement>({ delay: 0.05 })
   const bodyRef = useScrollReveal<HTMLParagraphElement>({ delay: 0.1 })
@@ -22,32 +26,31 @@ export default function About() {
         <div className={styles.grid}>
           <div>
             <p className="eyebrow reveal" ref={eyebrowRef}>
-              About
+              {t.about.eyebrow}
             </p>
             <p className={`${styles.lead} reveal`} ref={leadRef}>
-              I&apos;m a front-end developer who believes <strong>great interfaces</strong> are built at the
-              intersection of clean code and thoughtful design.
+              {t.about.leadPre} <strong>{t.about.leadStrong}</strong> {t.about.leadPost}
             </p>
             <p className={`${styles.body} reveal`} ref={bodyRef}>
-              I specialize in React and TypeScript, building responsive, performant products with an obsessive
-              attention to detail — from animation timing to accessibility. I care about how software feels to use
-              as much as how it works.
+              {t.about.body}
             </p>
           </div>
 
           <div className={styles.pillars} ref={pillarsRef}>
-            {pillars.map((pillar) => {
-              const Icon = PILLAR_ICONS[pillar.iconKey]
-              return (
-                <div key={pillar.title} className={`${styles.pillar} glass`}>
-                  <div className={styles.pillarIcon}>
-                    <Icon />
+            {pillars.map((pillar, i) => {
+                const Icon = PILLAR_ICONS[pillar.iconKey]
+                const title = t.about[`pillar${i + 1}Title` as keyof typeof t.about]
+                const description = t.about[`pillar${i + 1}Desc` as keyof typeof t.about]
+                return (
+                  <div key={pillar.iconKey} className={`${styles.pillar} glass`}>
+                    <div className={styles.pillarIcon}>
+                      <Icon />
+                    </div>
+                    <h4>{title}</h4>
+                    <p>{description}</p>
                   </div>
-                  <h4>{pillar.title}</h4>
-                  <p>{pillar.description}</p>
-                </div>
-              )
-            })}
+                )
+              })}
           </div>
         </div>
       </div>

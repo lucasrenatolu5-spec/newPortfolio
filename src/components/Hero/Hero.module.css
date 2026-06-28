@@ -74,6 +74,7 @@
 .stats {
   display: flex;
   gap: 48px;
+  max-width: 420px;
 }
 
 .stat {

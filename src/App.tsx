@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { LanguageProvider } from './i18n/LanguageContext'
 import Background from './components/Background/Background'
 import Cursor from './components/Cursor/Cursor'
 import Navbar from './components/Navbar/Navbar'
@@ -13,14 +14,13 @@ import Footer from './components/Footer/Footer'
 
 export default function App() {
   useEffect(() => {
-    // Refresh ScrollTrigger once fonts/images have settled.
     const handleLoad = () => ScrollTrigger.refresh()
     window.addEventListener('load', handleLoad)
     return () => window.removeEventListener('load', handleLoad)
   }, [])
 
   return (
-    <>
+    <LanguageProvider>
       <Cursor />
       <Background />
       <Navbar />
@@ -33,6 +33,6 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
-    </>
+    </LanguageProvider>
   )
 }
