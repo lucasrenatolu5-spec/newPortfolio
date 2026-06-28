@@ -1,0 +1,88 @@
+.grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 72px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+}
+
+.lead {
+  font-size: 22px;
+  line-height: 1.5;
+  color: var(--text);
+  font-family: 'Sora', sans-serif;
+  font-weight: 400;
+}
+
+.lead strong {
+  font-weight: 600;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.body {
+  color: var(--text-muted);
+  margin-top: 24px;
+  font-size: 15.5px;
+  max-width: 480px;
+}
+
+.pillars {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+@media (max-width: 560px) {
+  .pillars {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pillar {
+  padding: 26px;
+  position: relative;
+  overflow: hidden;
+}
+
+.pillar:hover {
+  transform: translateY(-4px);
+  border-color: rgba(167, 139, 250, 0.4);
+  box-shadow: 0 20px 40px -20px rgba(139, 92, 246, 0.35);
+}
+
+.pillarIcon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--gradient-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.pillarIcon svg {
+  width: 19px;
+  height: 19px;
+  stroke: #fff;
+}
+
+.pillar h4 {
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+.pillar p {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}

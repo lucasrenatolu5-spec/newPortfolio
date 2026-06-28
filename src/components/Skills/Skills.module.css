@@ -1,0 +1,69 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 620px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.card {
+  padding: 30px 20px;
+  text-align: center;
+  position: relative;
+  cursor: pointer;
+  will-change: transform;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(167, 139, 250, 0.45);
+  box-shadow: 0 26px 50px -20px rgba(79, 139, 255, 0.35);
+}
+
+.iconWrap {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 16px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--surface-border);
+  transition:
+    transform 0.45s var(--ease),
+    background 0.4s var(--ease);
+}
+
+.card:hover .iconWrap {
+  transform: rotate(8deg) scale(1.08);
+  background: rgba(139, 92, 246, 0.1);
+}
+
+.iconWrap svg {
+  width: 26px;
+  height: 26px;
+}
+
+.name {
+  font-size: 14.5px;
+  font-weight: 500;
+  font-family: 'Sora', sans-serif;
+}
+
+.level {
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  margin-top: 4px;
+}
