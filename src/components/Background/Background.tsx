@@ -24,7 +24,7 @@ export default function Background() {
     const particlesWrap = particlesRef.current
     const createdParticles: HTMLDivElement[] = []
     if (particlesWrap) {
-      const count = window.innerWidth < 768 ? 18 : 34
+      const count = window.innerWidth < 768 ? 8 : 16
       for (let i = 0; i < count; i++) {
         const p = document.createElement('div')
         p.className = styles.particle
