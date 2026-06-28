@@ -55,7 +55,7 @@ export default function Background() {
 
   return (
     <>
-      <div className={styles.grain} aria-hidden="true" />
+     {/* <div className={styles.grain} aria-hidden="true" /> */}
       <div className={styles.blobsWrap} aria-hidden="true">
         <div ref={blob1Ref} className={`${styles.blob} ${styles.blob1}`} />
         <div ref={blob2Ref} className={`${styles.blob} ${styles.blob2}`} />
