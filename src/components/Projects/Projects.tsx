@@ -3,12 +3,6 @@ import { useScrollReveal, useStaggerReveal } from '../../hooks/useScrollReveal'
 import { GitHubIcon, ExternalLinkIcon } from '../Icons'
 import styles from './Projects.module.css'
 
-const THUMB_CLASS_MAP: Record<string, string> = {
-  thumb1: styles.thumb1,
-  thumb2: styles.thumb2,
-  thumb3: styles.thumb3,
-  thumb4: styles.thumb4,
-}
 
 export default function Projects() {
   const eyebrowRef = useScrollReveal<HTMLParagraphElement>()
