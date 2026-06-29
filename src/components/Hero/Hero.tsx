@@ -11,10 +11,10 @@ export default function Hero() {
 
 
   const STATS = [
-  { count: 20, label: t.hero.stat1 },
-  { count: 5, label: t.hero.stat2 },
-  { count: 100, label: t.hero.stat3 },
-]
+    { count: 20, label: t.hero.stat1 },
+    { count: 5, label: t.hero.stat2 },
+    { count: 100, label: t.hero.stat3 },
+  ]
 
 
   const sectionRef = useRef<HTMLDivElement | null>(null)
@@ -62,7 +62,7 @@ export default function Hero() {
       gsap.to(statusCardRef.current, { y: '-=10', duration: 3.8, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: 0.4 }),
     ]
 
-    // mouse parallax
+    // mouse parallax (otimizado com quickTo, mais leve para eventos de alta frequencia)
     const heroEl = sectionRef.current
     const parallaxEls = [
       { el: glowRef.current, depth: 0.4 },
@@ -71,14 +71,21 @@ export default function Hero() {
       { el: statusCardRef.current, depth: 1.4 },
     ]
 
+    const quickXs = parallaxEls.map(({ el }) =>
+      el ? gsap.quickTo(el, 'x', { duration: 0.8, ease: 'power3.out' }) : null,
+    )
+    const quickYs = parallaxEls.map(({ el }) =>
+      el ? gsap.quickTo(el, 'y', { duration: 0.8, ease: 'power3.out' }) : null,
+    )
+
     const handleMouseMove = (e: MouseEvent) => {
       if (!heroEl) return
       const r = heroEl.getBoundingClientRect()
       const px = (e.clientX - r.left) / r.width - 0.5
       const py = (e.clientY - r.top) / r.height - 0.5
-      parallaxEls.forEach(({ el, depth }) => {
-        if (!el) return
-        gsap.to(el, { x: px * 24 * depth, y: py * 18 * depth, duration: 0.8, ease: 'power3.out' })
+      parallaxEls.forEach(({ depth }, i) => {
+        quickXs[i]?.(px * 24 * depth)
+        quickYs[i]?.(py * 18 * depth)
       })
     }
 

@@ -291,3 +291,16 @@
     opacity: 0;
   }
 }
+
+@media (max-width: 980px) {
+  .hero {
+    flex-direction: column;
+  }
+
+  .scrollCue {
+    position: static;
+    transform: none;
+    left: auto;
+    margin: 40px auto 0;
+  }
+}
