@@ -9,15 +9,20 @@ export function useMagnetic<T extends HTMLElement>() {
     const el = ref.current
     if (!el) return
 
+    const quickX = gsap.quickTo(el, 'x', { duration: 0.4, ease: 'power3.out' })
+    const quickY = gsap.quickTo(el, 'y', { duration: 0.4, ease: 'power3.out' })
+
     const handleMove = (e: MouseEvent) => {
       const r = el.getBoundingClientRect()
       const x = e.clientX - r.left - r.width / 2
       const y = e.clientY - r.top - r.height / 2
-      gsap.to(el, { x: x * 0.3, y: y * 0.4, duration: 0.4, ease: 'power3.out' })
+      quickX(x * 0.3)
+      quickY(y * 0.4)
     }
 
     const handleLeave = () => {
-      gsap.to(el, { x: 0, y: 0, duration: 0.5, ease: 'power3.out' })
+      quickX(0)
+      quickY(0)
     }
 
     el.addEventListener('mousemove', handleMove)

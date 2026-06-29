@@ -1,7 +1,7 @@
-import lash from '../assets/preview/lash-designer.png'
-import dental from '../assets/preview/dentalClinic.png'
-import dolce from '../assets/preview/dolceFemme.png'
-import fernando from '../assets/preview/drFernando.png'
+import lash from '../assets/preview/lash-designer.webp'
+import dental from '../assets/preview/dentalClinic.webp'
+import dolce from '../assets/preview/dolceFemme.webp'
+import fernando from '../assets/preview/drFernando.webp'
 
 export interface Skill {
   name: string
